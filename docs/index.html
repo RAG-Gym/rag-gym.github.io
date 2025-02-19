@@ -1,0 +1,484 @@
+<style>
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%; /* or any desired width */
+  }
+  table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  }
+
+  caption {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  thead th {
+    background-color: #f2f2f2;
+  }
+
+  table th, table td {
+    text-align: center;
+  }
+  
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Optimizing Agentic RAG with Process Supervision">
+  <meta name="keywords" content="RAG, medicine, question answering">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Optimizing Agentic RAG with Process Supervision</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">RAG-Gym: Optimizing Reasoning and Search Agents with Process Supervision</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/guangzhi-xiong-47a299251">Guangzhi Xiong</a><sup>1*</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://andy-jqa.github.io/">Qiao Jin</a><sup>2*</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/xiao-wang-6143a928b">Xiao Wang</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://fangyinfff.github.io/">Yin Fang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://liuhl2000.github.io/">Haolin Liu</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://yifanyang.dev/">Yifan Yang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/fangyuan-chen-45271816a/">Fangyuan Chen</a><sup>4</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/zhixing-song-284772186">Zhixing Song</a><sup>5</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://www.linkedin.com/in/dengyuwang">Dengyu Wang</a><sup>6</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://minjiazhang.github.io/">Minjia Zhang</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.ncbi.nlm.nih.gov/research/bionlp/Zhiyong-Lu">Zhiyong Lu</a><sup>2†</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.cs.virginia.edu/~az9eg/website/home.html">Aidong Zhang</a><sup>1†</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Department of Computer Science, University of Virginia</span><br>
+            <span class="author-block"><sup>2</sup>National Library of Medicine, National Institutes of Health</span><br>
+            <span class="author-block"><sup>3</sup>Department of Computer Science, University of Illinois Urbana-Champaign</span><br>
+            <span class="author-block"><sup>4</sup>Medical Oncology, Dana-Farber Cancer Institute</span><br>
+            <span class="author-block"><sup>5</sup>Surgery, University of Alabama at Birmingham</span><br>
+            <span class="author-block"><sup>6</sup>Department of Neurology, Yale School of Medicine</span><br>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">*Equal Contribution,</span>
+            <span class="author-block">†Co-correspondence</span><br>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/RAG-Gym/RAG-Gym"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Models Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/RAG-Gym"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <p style="font-size:18px">🤗</p>
+                  </span>
+                  <span>Models</span>
+                  </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Retrieval-augmented generation (RAG) has shown great potential for knowledge-intensive tasks, but its traditional architectures rely on static retrieval, limiting their effectiveness for complex questions that require sequential information-seeking. While agentic reasoning and search offer a more adaptive approach, most existing methods depend heavily on prompt engineering. 
+          </p>
+          
+          <p>
+            In this work, we introduce <b>RAG-Gym</b>, a unified optimization framework that enhances information-seeking agents through fine-grained process supervision at each search step. We also propose <b>ReSearch</b>, a novel agent architecture that synergizes answer reasoning and search query generation within the RAG-Gym framework. 
+          </p>
+          
+          <p>
+            Experiments on four challenging datasets show that RAG-Gym improves performance by up to 25.6\% across various agent architectures, with ReSearch consistently outperforming existing baselines. Further analysis highlights the effectiveness of advanced LLMs as process reward judges and the transferability of trained reward models as verifiers for different LLMs. Additionally, we examine the scaling properties of training and inference in agentic RAG. 
+          </p>
+        </div>
+      </div>
+    </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered has-text-centered">
+
+      <div class="column is-four-fifths">
+        <h3 class="title is-3">Retrieval-Augmented Generation Gymnasium (RAG-Gym)</h3>
+        <div class="content has-text-justified">
+          <p>
+            Here is the overview of RAG-Gym: (a) RAG-Gym formulates the knowledge-intensive question-answering (QA) task as a nested Markov Decision Process (MDP), where the outer MDP governs high-level action generation through interactions with the information retrieval (IR) environment, while the inner MDP controls token generation within LLM. (b) Different process supervision methods are implemented in RAG-Gym, including Supervised Fine-tuning (SFT), Direct Preference Optimization (DPO), and Process Reward Modeling (PRM).
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered">
+        <img src="./figs/rag_gym.png" alt="RAG-Gym Overview" class="center" style="max-width: 100%; height: auto;"/>
+      </div>
+    </div>
+
+  </div>
+  
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered has-text-centered">
+
+      <div class="column is-four-fifths">
+        <h3 class="title is-3">Reasoning and Search (ReSeach) Agent</h3>
+        <div class="content has-text-justified">
+          <p>
+            We also propose ReSearch, which synergizes <u>Re</u>asoning and <u>Search</u> by integrating history knowledge summarization, answer reasoning, and query generation to iteratively resolve missing information in constructing the final answer.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered">
+        <img src="./figs/research_agent.png" alt="ReSearch Agent Architecture" class="center" style="max-width: 100%; height: auto;"/>
+      </div>
+    </div>
+  
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <p>
+            Here is a comparison of different agent architectures in handling a multi-hop question constructed from Wikipedia. ReSearch explicitly aligns reasoning with query generation, leading to more targeted retrieval and improved answer quality.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered">
+        <img src="./figs/research_case.png" alt="ReSearch Agent Example" class="center" style="max-width: 100%; height: auto;"/>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h3 class="title is-3">Main Results</h3>
+        <div class="content has-text-justified">
+          <p>
+            The table below shows the performance of various agents and their tuned versions using different process supervision methods in RAG-Gym. 
+            Process supervision consistently improves performance across all agents compared to the zero-shot learning (ZSL) baseline, demonstrating its effectiveness in enhancing intermediate reasoning and query generation.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered">
+        <img src="./figs/main_results.png" alt="Main Results Table" class="center" style="max-width: 100%; height: auto;"/>
+      </div>
+    </div>
+
+
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div class="columns">
+
+          <div class="column">
+            <div class="content">
+              <h4 class="title is-4">Comparison of Process Supervision Methods</h4>
+              <p>
+                Among the three process supervision algorithms, <b>PRM achieves the best results overall</b>, outperforming ZSL baselines by up to 25.6% (ReAct; Average F1). While PRM outperforms the other methods, both DPO and SFT show significant improvements over the ZSL baseline. Interestingly, SFT slightly outperforms DPO on the Direct, CoT, and RAG agents, where the tuning focuses exclusively on the answer generation step. In contrast, DPO significantly surpasses SFT on ReAct, Search-o1, and ReSearch, where the tuning process also involves learning to generate high-quality queries by contrasting positive and negative samples.
+              </p>
+            </div>
+          </div>
+          
+          <div class="column">
+            <div class="content">
+              <h4 class="title is-4">Comparison of ReSearch and other Agents</h4>
+              <p>
+                <b>ReSearch consistently outperforms other agents</b>, both in the ZSL setting and in settings with process supervision. Without tuning, ReSearch achieves strong zero-shot performance, demonstrating the effectiveness of explicitly aligning answer reasoning with query generation. Using process reward models, ReSearch achieves state-of-the-art performance, with an average EM score of 54.31% and an average F1 score of 62.41% across different datasets. Furthermore, ReSearch exhibits superior generalization, achieving top scores on 2WikiMultihopQA and Bamboogle without task-specific fine-tuning. 
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <h4 class="title is-4">Reward Model Transferability</h4>
+          <p>
+            This figure highlights the performance improvements of the ReSearch agent with GPT-4o-mini using Llama-3.1-8B-based process reward models. The action selection with reward models leads to consistent gains across all tasks, demonstrating <b>the transferability of PRM to effectively select high-quality actions in different LLMs</b>. This result also highlights the potential of using process reward models as a plug-and-play module to enhance the reasoning and search capabilities of proprietary LLMs, where direct fine-tuning is not feasible due to restrictions on model access.             
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered">
+        <img src="./figs/gpt-4o-mini.png" alt="Transferability" class="center" style="max-width: 100%; height: auto;"/>
+      </div>
+    </div>
+    
+  </div>
+
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h3 class="title is-3">Analysis and Discussion</h3>
+        <div class="content has-text-justified">
+          <h4 class="title is-4">Comparison of Different Reward Sources</h4>
+          <p>
+            To evaluate the effectiveness of different process reward sources in training reward models, we conducted experiments on MedQA and compared their alignments with domain expert preferences as well as their impact on downstream accuracy. The results are shown below. The reward model trained with GPT-4o annotations achieved the highest agreement with human preferences (85.85%), significantly outperforming the rollout-based method (71.03%) introduced in Math-Shepherd. Furthermore, the model trained with GPT-4o annotations achieved the highest accuracy (71.96%), highlighting its effectiveness in knowledge-intensive tasks.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="has-text-centered">Type</th>
+              <th class="has-text-centered">Source</th>
+              <th class="has-text-centered">Agreement (%)</th>
+              <th class="has-text-centered">Accuracy (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="has-text-centered">Outcome Reward Model</td>
+              <td class="has-text-centered">Truth</td>
+              <td class="has-text-centered">--</td>
+              <td class="has-text-centered">66.77</td>
+            </tr>
+            <tr>
+              <td class="has-text-centered">Process Reward Model</td>
+              <td class="has-text-centered">Random</td>
+              <td class="has-text-centered">50.00</td>
+              <td class="has-text-centered">68.26</td>
+            </tr>
+            <tr>
+              <td class="has-text-centered">Process Reward Model</td>
+              <td class="has-text-centered">Rollout</td>
+              <td class="has-text-centered">71.03</td>
+              <td class="has-text-centered">68.34</td>
+            </tr>
+            <tr>
+              <td class="has-text-centered">Process Reward Model</td>
+              <td class="has-text-centered">GPT-4o</td>
+              <td class="has-text-centered">85.85</td>
+              <td class="has-text-centered">71.96</td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    </div>
+
+    
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div class="columns">
+
+          <div class="column">
+            <div class="content">
+              <h4 class="title is-4">Training Time Scaling</h4>
+              <p>
+                This figure displays how the performance of ReSearch agents scales with the availability of more training data across four datasets. In general, the performance of ReSearch improves with an increasing number of training samples, but the gains tend to converge as the sample size grows.  Notably, on HotpotQA, 2WikiMultihopQA, and Bambooglem, even a small amount of process reward data (250 samples) yield significant performance gains.
+              </p>
+            </div>
+            <div class="columns is-centered">
+              <div class="column is-full has-text-centered">
+                <img src="./figs/train_scale.png" alt="Training Time Scaling" class="center" style="max-width: 100%; height: auto;"/>
+              </div>
+            </div>
+          </div>
+          
+          <div class="column">
+            <div class="content">
+              <h4 class="title is-4">Inference Time Scaling</h4>
+              <p>
+                The results below show how the agent performance changes with the increasing number of sampled actions at each time step. We observe a consistent trend across multiple benchmarks, where increasing the number of sampled actions generally improves performance. However, performance gains gradually diminish, indicating that the agent reaches a point where additional sampled actions contribute less to improvement. 
+                <!-- This suggests that while action sampling is beneficial, there is a limit to how much additional sampling enhances decision-making. -->
+              </p>
+            </div>
+            <div class="columns is-centered">
+              <div class="column is-full has-text-centered">
+                <img src="./figs/test_scale.png" alt="Inference Time Scaling" class="center" style="max-width: 100%; height: auto;"/>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code></code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/RAG-Gym/RAG-Gym" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is website adapted from <a href="https://nerfies.github.io/">Nerfies</a> and <a href="https://mathvista.github.io/">MathVista</a>, licensed under a <a rel="license"
+            href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
