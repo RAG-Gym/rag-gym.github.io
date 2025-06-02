@@ -393,9 +393,10 @@
     
     <div class="columns is-centered">
       <div class="column is-four-fifths">
-      <table class="table">
+      <div class="table-container">
+        <table class="table is-fullwidth">
         <thead>
-        <tr>
+          <tr>
           <th class="has-text-centered">Type</th>
           <th class="has-text-centered">Outcome Source</th>
           <th class="has-text-centered">Process Source</th>
@@ -403,10 +404,10 @@
           <th class="has-text-centered">2WikiMultihopQA<br>(EM / F1)</th>
           <th class="has-text-centered">Bamboogle<br>(EM / F1)</th>
           <th class="has-text-centered">MedQA<br>(Acc / Agree)</th>
-        </tr>
+          </tr>
         </thead>
         <tbody>
-        <tr>
+          <tr>
           <td class="has-text-centered">ORM</td>
           <td class="has-text-centered">Truth</td>
           <td class="has-text-centered">--</td>
@@ -414,8 +415,8 @@
           <td class="has-text-centered">47.70 / 55.59</td>
           <td class="has-text-centered">43.20 / 57.46</td>
           <td class="has-text-centered">66.77 / --</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
           <td class="has-text-centered">PRM (Random)</td>
           <td class="has-text-centered">--</td>
           <td class="has-text-centered">--</td>
@@ -423,8 +424,8 @@
           <td class="has-text-centered">35.70 / 42.00</td>
           <td class="has-text-centered">38.40 / 47.86</td>
           <td class="has-text-centered">68.26 / 50.00</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
           <td class="has-text-centered">PRM (Rollout)</td>
           <td class="has-text-centered">Truth</td>
           <td class="has-text-centered">Rollout</td>
@@ -432,8 +433,8 @@
           <td class="has-text-centered">42.94 / 49.57</td>
           <td class="has-text-centered">48.80 / 56.05</td>
           <td class="has-text-centered">68.34 / 71.03</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
           <td class="has-text-centered">PRM (Llama)</td>
           <td class="has-text-centered">Truth</td>
           <td class="has-text-centered">Llama-3.1-8B</td>
@@ -441,8 +442,8 @@
           <td class="has-text-centered">40.70 / 48.22</td>
           <td class="has-text-centered">44.80 / 54.36</td>
           <td class="has-text-centered">68.50 / 65.99</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
           <td class="has-text-centered">PRM (GPT)</td>
           <td class="has-text-centered">Truth</td>
           <td class="has-text-centered">GPT-4o</td>
@@ -450,9 +451,10 @@
           <td class="has-text-centered"><b>50.20 / 57.94</b></td>
           <td class="has-text-centered"><b>51.20 / 63.15</b></td>
           <td class="has-text-centered"><b>71.96 / 85.85</b></td>
-        </tr>
+          </tr>
         </tbody>
-      </table>
+        </table>
+      </div>
       </div>
     </div>
 
