@@ -1,46 +1,47 @@
-<style>
-  .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%; /* or any desired width */
-  }
-  table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 1rem;
-  }
-
-  caption {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-
-  th, td {
-    border: 1px solid #ddd;
-    padding: 0.5rem;
-    text-align: center;
-  }
-
-  thead th {
-    background-color: #f2f2f2;
-  }
-
-  table th, table td {
-    text-align: center;
-  }
-  
-</style>
-
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
+  <style>
+    .center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 80%; /* or any desired width */
+    }
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    }
+
+    caption {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    thead th {
+      background-color: #f2f2f2;
+    }
+
+    table th, table td {
+      text-align: center;
+    }
+    .publication-venue {
+      margin: 0 auto 0.75rem;
+    }
+  </style>
   <meta name="description"
-        content="Optimizing Agentic RAG with Process Supervision">
-  <meta name="keywords" content="RAG, medicine, question answering">
+        content="RAG-Gym: Supervising the search process produces reliable and generalizable information-seeking agents (Nature Communications, 2026)">
+  <meta name="keywords" content="retrieval-augmented generation, search agents, process supervision, information seeking">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RAG-Gym: Systematic Optimization of Language Agents for Retrieval-Augmented Generation</title>
+  <title>RAG-Gym | Supervising the search process produces reliable and generalizable information-seeking agents</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
@@ -92,7 +93,8 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">RAG-Gym: Systematic Optimization of Language Agents for Retrieval-Augmented Generation</h1>
+          <h1 class="title is-1 publication-title">Supervising the search process produces reliable and generalizable information-seeking agents</h1>
+          <div class="is-size-5 publication-venue">Nature Communications, 2026</div>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://www.linkedin.com/in/guangzhi-xiong-47a299251">Guangzhi Xiong</a><sup>1*</sup>,
@@ -136,8 +138,8 @@
             <span class="author-block"><sup>1</sup>Department of Computer Science, University of Virginia</span><br>
             <span class="author-block"><sup>2</sup>National Library of Medicine, National Institutes of Health</span><br>
             <span class="author-block"><sup>3</sup>Department of Computer Science, University of Illinois Urbana-Champaign</span><br>
-            <span class="author-block"><sup>4</sup>Medical Oncology, Dana-Farber Cancer Institute</span><br>
-            <span class="author-block"><sup>5</sup>Surgery, University of Alabama at Birmingham</span><br>
+            <span class="author-block"><sup>4</sup>Department of Medical Oncology, Dana-Farber Cancer Institute</span><br>
+            <span class="author-block"><sup>5</sup>Department of Surgery, University of Alabama at Birmingham</span><br>
             <span class="author-block"><sup>6</sup>Department of Neurology, Yale School of Medicine</span><br>
           </div>
 
@@ -148,14 +150,24 @@
 
           <div class="column has-text-centered">
             <div class="publication-links">
-              <!-- PDF Link. -->
+              <!-- Paper Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2502.13957"
+                <a href="https://www.nature.com/articles/s41467-026-78807-z"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                   </span>
                   <span>Paper</span>
+                </a>
+              </span>
+              <!-- arXiv Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2502.13957"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
                 </a>
               </span>
               <!-- Code Link. -->
@@ -203,19 +215,20 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Retrieval-augmented generation (RAG) has shown great promise for knowledge-intensive tasks and recently advanced with agentic RAG, where language agents engage in multi-round interactions with external knowledge sources for adaptive information retrieval. However, existing agentic RAG methods often depend on ad-hoc prompt engineering and lack a unified optimization framework.
+            Large language models (LLMs) are transforming web search by shifting from document ranking to synthesizing answers, and are increasingly deployed as autonomous agentic search systems that iteratively interact with external knowledge sources. Despite this progress, building effective search agents remains challenging because high-quality intermediate search steps are difficult to generate. Previous approaches have primarily relied on outcome supervision, rewarding agents only for producing correct final answers. This often leads to reward hacking and excessive dependence on parametric memory, limiting generalization to out-of-domain tasks.
           </p>
-          
+
           <p>
-            We introduce <b>RAG-Gym</b>, a comprehensive platform that systematically explores three optimization dimensions: (1) prompt engineering, (2) actor tuning, and (3) critic training. For prompt engineering, we propose Re²Search, a novel agent incorporating reasoning reflection that significantly outperforms standard prompts. In actor tuning, we evaluate three popular post-training algorithms with fine-grained process supervision and identify direct preference optimization as the most effective. We further demonstrate that a trained critic can enhance inference by selecting higher-quality intermediate reasoning steps.
+            To address these limitations, we introduce <b>RAG-Gym</b>, a framework that shifts supervision from final answers to the search process itself. With RAG-Gym, we systematically investigate architecture design, parameter optimization, and action evaluation, identifying reasoning reflection as a critical capability for search agents.
           </p>
-          
+
           <p>
-            Together, these findings lead to the optimized <b>Re²Search++</b> agent, which surpasses most recent methods like Search-R1 by a relative increase of 3.2% to 11.6% in average F1. Finally, we examine the impact of different reward sources and analyze scaling properties in training and inference, offering practical insights for agentic RAG optimization.
+            Building on this insight, we propose <b>Re²Search++</b>, a process-supervised agent that achieves substantial improvements on multi-hop information-seeking benchmarks, especially in out-of-domain settings. Performance gains are driven primarily by higher-quality search queries rather than answer optimization alone, and the learned search critics transfer across models, including proprietary LLMs. These findings show that supervising the search process produces more reliable and generalizable information-seeking agents.
           </p>
         </div>
       </div>
     </div>
+  </div>
 </section>
 
 <section class="section">
@@ -227,7 +240,10 @@
         <h3 class="title is-3">RAG-Gym Framework</h3>
         <div class="content has-text-justified">
           <p>
-            Here is an overview of the RAG-Gym framework. RAG-Gym employs a modular design, comprising <em>prompt engineering</em>, <em>actor tuning</em>, and <em>critic training</em>, to systematically optimize agentic RAG performance. By leveraging all three components, RAG-Gym improves the F1 score of the ReAct agent on HotpotQA from 41.09% to 60.19%.
+            RAG-Gym formulates agentic search as a high-level Markov decision process (MDP), in which each step is a macro-action: issuing a search query or generating the final answer. This exposes intermediate search steps to direct supervision. Outcome-only supervision, by contrast, rewards a whole trajectory whenever its final answer is correct, even if that answer came from parametric memory rather than retrieved evidence.
+          </p>
+          <p>
+            On top of this formulation, RAG-Gym decomposes the design of search agents into three dimensions: <em>architecture design</em>, <em>parameter optimization</em>, and <em>action evaluation</em>. For each dimension, we compare a set of candidate strategies and combine the best-performing choices into a single agent, Re²Search++. With Llama-3.1-8B, Re²Search++ improves the F1 score on HotpotQA from 41.1% (ReAct) to 60.2%.
           </p>
         </div>
       </div>
@@ -236,7 +252,7 @@
 
     <div class="columns is-centered">
       <div class="column is-full has-text-centered">
-        <img src="./figs/rag_gym.png" alt="RAG-Gym Overview" class="center" style="max-width: 100%; height: auto;"/>
+        <img src="./figs/framework.png" alt="RAG-Gym framework" class="center" style="max-width: 100%; height: auto;"/>
       </div>
     </div>
 
@@ -250,18 +266,18 @@
     <div class="columns is-centered has-text-centered">
 
       <div class="column is-four-fifths">
-        <h3 class="title is-4">🏋️ Dimension 1: Prompt Engineering</h3>
+        <h3 class="title is-4">🏋️ Dimension 1: Architecture Design</h3>
         <div class="content has-text-justified">
           <p>
-            Effective prompts are key to guiding LLM behavior. Building on a summary of existing agent functions—such as answer generation, question reasoning, and query generation—RAG-Gym introduces a novel agent architecture called Re²Search (Reasoning, Reflection, and Search).
-
-            The core innovation of Re²Search lies in its unique "reasoning reflection" mechanism. Before making a final decision, the agent will:
-            <ol>
-              <li>Construct an initial reasoning process and answer based on all currently available information.</li>
-              <li>Reflect on its reasoning chain to identify which statements lack support from current information or are unverified claims.</li>
-              <li>Generate highly targeted search queries based on these "uncertainties" to acquire missing key information and improve the answer.</li>
-            </ol>
-            This design tightly integrates the search process with answer construction. Here is the comparison of the functional components in various agent architectures. Re²Search is the only agent that incorporates all six key components, including "reasoning reflection".<br>
+            We decompose the capabilities of search agents into six functional modules: answer generation, question reasoning, retrieval augmentation, query generation, document summarization, and reasoning reflection. Existing architectures, from Direct prompting and CoT to RAG, ReAct, and Search-o1, each add one capability to the previous design, but none checks whether its reasoning is supported by evidence before searching. RAG-Gym introduces a new agent architecture called Re²Search (Reasoning, Reflection, and Search) that adds this step. At each step, the agent will:
+          </p>
+          <ol>
+            <li>Draft a reasoning chain and a tentative answer from the information gathered so far.</li>
+            <li>Reflect on the reasoning chain to find claims that are not yet supported by retrieved evidence.</li>
+            <li>Turn the first unsupported claim into a targeted search query.</li>
+          </ol>
+          <p>
+            Reflection is built into the architecture and needs no reflection-specific training or ground-truth answer. Re²Search is the only architecture that includes all six modules.
           </p>
         </div>
       </div>
@@ -269,7 +285,7 @@
 
     <div class="columns is-centered">
       <div class="column is-full has-text-centered">
-        <img src="./figs/compare.png" alt="Agent Comparison" class="center" style="max-width: 100%; height: auto;"/>
+        <img src="./figs/architecture.png" alt="Agent architectures" class="center" style="max-width: 100%; height: auto;"/>
       </div>
     </div>
 
@@ -277,7 +293,7 @@
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
           <p>
-            Extensive tests across models and datasets show that prompt engineering alone gives Re²Search a clear advantage over standard prompts. For example, on HotpotQA, zero-shot ReAct achieves 41.09% F1, while Re²Search reaches 44.91%.
+            Across the four benchmarks, Re²Search consistently achieves the highest performance among the six architectures, and the advantage persists under zero-shot learning (ZSL) and after SFT, DPO, or PPO training. In the example above, ReAct and Search-o1 search for a generic list of Canadian fathers of Confederation, while Re²Search first verifies the specific claim its answer depends on.
           </p>
         </div>
       </div>
@@ -293,12 +309,13 @@
     <div class="columns is-centered has-text-centered">
 
       <div class="column is-four-fifths">
-        <h3 class="title is-4">💪 Dimension 2: Actor Tuning</h3>
+        <h3 class="title is-4">💪 Dimension 2: Parameter Optimization</h3>
         <div class="content has-text-justified">
           <p>
-            The "actor" refers to the LLM itself, and optimizing its parameters is crucial for improving decision quality. RAG-Gym enables fine-grained process supervision for actor tuning, meaning we not only consider the correctness of the final answer but also evaluate and reward each intermediate decision—such as generated search queries or reasoning steps.
-
-            We systematically evaluate three mainstream LLM post-training algorithms: supervised fine-tuning (SFT), direct preference optimization (DPO), and proximal policy optimization (PPO). Our experiments show that for agents like ReAct, Search-o1, and Re²Search—which require multi-step reasoning and interaction with the environment—DPO and PPO generally outperform SFT, delivering more significant performance gains across most tasks. DPO, in particular, leverages preference comparisons between positive and negative actions to more effectively guide the model in generating high-quality intermediate steps. For example, after DPO tuning, Re²Search improves its F1 score on HotpotQA from 44.91% (zero-shot) to 55.22%.
+            RAG-Gym tunes the actor (the LLM itself) with fine-grained process supervision, giving feedback on each intermediate action rather than only the final answer. We compare zero-shot learning (ZSL) with three post-training algorithms: supervised fine-tuning (SFT), direct preference optimization (DPO), and proximal policy optimization (PPO).
+          </p>
+          <p>
+            Process supervision consistently improves over zero-shot baselines, but the best algorithm depends on the agent. Single-step agents (Direct, CoT, and RAG) reach their peak with SFT. Multi-step agents (ReAct, Search-o1, and Re²Search) benefit substantially more from DPO and PPO, whose negative signals teach the agent which search actions to avoid. DPO gives Re²Search its largest improvement, increasing F1 scores by an average of 3.92% over the zero-shot baseline. Process-supervised agents also issue more search queries at inference than their zero-shot counterparts, a sign that they have learned to recognize the limits of their own knowledge.
           </p>
         </div>
       </div>
@@ -307,39 +324,7 @@
 
     <div class="columns is-centered">
       <div class="column is-full has-text-centered">
-        <img src="./figs/actor_tuning.png" alt="Actor Tuning" class="center" style="max-width: 100%; height: auto;"/>
-      </div>
-    </div>
-
-  </div>
-  
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-
-    <div class="columns is-centered has-text-centered">
-
-      <div class="column is-four-fifths">
-        <h3 class="title is-4">🧐 Dimension 3: Critic Training</h3>
-        <div class="content has-text-justified">
-          <p>
-            Beyond optimizing the actor, RAG-Gym also introduces a "critic" model—an external evaluator trained to predict the process reward for each state-action pair. The critic assesses the quality of actions (such as generated search queries) produced by the agent at each step.
-
-            During inference, the actor generates multiple candidate actions for the current state. The critic scores these candidates, and the system selects the action with the highest score for execution. This mechanism offers several key advantages:
-            <ul>
-              <li><b>Improved generalizability:</b> Our experiments show that integrating a trained critic consistently boosts performance across various models—including base LLMs (like Llama-3.1-8B), DPO-tuned LLMs, and even models such as GPT-4o-mini—on multiple datasets.</li>
-              <li><b>Plug-and-play enhancement:</b> The critic can be used as a standalone module to enhance LLMs that cannot be directly fine-tuned (e.g., closed-source models), providing an effective way to improve their RAG capabilities.</li>
-            </ul>
-          </p>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="columns is-centered">
-      <div class="column is-full has-text-centered">
-        <img src="./figs/critic_training.png" alt="Critic Training" class="center" style="max-width: 100%; height: auto;"/>
+        <img src="./figs/parameter_optimization.png" alt="Parameter optimization" class="center" style="max-width: 100%; height: auto;"/>
       </div>
     </div>
 
@@ -347,6 +332,36 @@
   
 </section>
 
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered has-text-centered">
+
+      <div class="column is-four-fifths">
+        <h3 class="title is-4">🧐 Dimension 3: Action Evaluation</h3>
+        <div class="content has-text-justified">
+          <p>
+            Beyond optimizing the actor, RAG-Gym trains a critic, an external reward model that scores the actions an agent proposes. During inference, the actor generates multiple candidate actions for the current state, the critic scores them, and the agent executes the highest-scoring one (Best-of-<i>N</i>). This mechanism offers two key advantages:
+          </p>
+          <ul>
+            <li><b>Better multi-step search:</b> Critic guidance improves CoT, RAG, ReAct, Search-o1, and Re²Search on the general-domain benchmarks. On MedQA, only the multi-step agents (ReAct, Search-o1, and Re²Search) gain substantially, suggesting that the critic mainly helps agents navigate sequential retrieval rather than check final answers.</li>
+            <li><b>Transfer across models:</b> A critic trained only on Llama-3.1-8B trajectories improves both a DPO-tuned Llama-3.1-8B actor and GPT-4o-mini, raising GPT-4o-mini's MedQA accuracy from 76.8% to 78.1%. Lightweight open-source critics can therefore guide proprietary models without access to their weights.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered">
+        <img src="./figs/action_evaluation.png" alt="Action evaluation" class="center" style="max-width: 100%; height: auto;"/>
+      </div>
+    </div>
+
+  </div>
+  
+</section>
+
 
 <section class="section">
   <div class="container is-max-desktop">
@@ -354,12 +369,13 @@
     <div class="columns is-centered has-text-centered">
 
       <div class="column is-four-fifths">
-        <h3 class="title is-4">🏆 Re²Search++: Optimized Agent Across All Dimensions</h3>
+        <h3 class="title is-4">🏆 Re²Search++: Process Supervision Generalizes Better</h3>
         <div class="content has-text-justified">
           <p>
-            By integrating the best practices from all three optimization dimensions—adopting the Re²Search agent architecture, tuning the actor with DPO, and leveraging a Critic for action selection during inference—we developed the optimized Re²Search++ agent.
-
-            Compared to recent reinforcement learning methods that rely on outcome supervision (such as Search-R1 and R1-Searcher, which typically require thousands of training questions), Re²Search++ demonstrates clear advantages. It not only matches or surpasses these methods on their reported training domains (e.g., HotpotQA), but also achieves substantial improvements on out-of-domain datasets (e.g., Bamboogle), with a relative F1 increase of 3.2% to 11.6% on average. This highlights the strong generalization capability enabled by RAG-Gym's fine-grained process supervision, effectively mitigating the overfitting issues that can arise from relying solely on outcome-based rewards.
+            Re²Search++ combines the best choice from each dimension: the Re²Search architecture, DPO training, and critic-guided inference. We compare it with strong outcome-supervised agents, Search-R1 and R1-Searcher, which reinforce trajectories based only on the correctness of the final answer. Outcome supervision works well in domain, but these agents degrade on out-of-domain datasets. Re²Search++, tuned on HotpotQA, remains comparable or better on their in-domain tasks and generalizes better to unseen benchmarks, most clearly Bamboogle (66.4% vs. 53.2% F1 for R1-Searcher with Llama-3.1-8B).
+          </p>
+          <p>
+            Retrieval recall shows why. Outcome-supervised agents often reach correct answers with low recall of the ground-truth documents, suggesting reliance on parametric memory rather than retrieved evidence. Re²Search++ recalls the highest fraction of ground-truth documents with both Llama-3.1-8B and Qwen-2.5-7B (85.5% vs. 27.5% for R1-Searcher on HotpotQA with Llama-3.1-8B), while issuing comparable or fewer search queries.
           </p>
         </div>
       </div>
@@ -368,7 +384,7 @@
 
     <div class="columns is-centered">
       <div class="column is-full has-text-centered">
-        <img src="./figs/main_results.png" alt="Main Results" class="center" style="max-width: 100%; height: auto;"/>
+        <img src="./figs/process_vs_outcome.png" alt="Process vs. outcome supervision" class="center" style="max-width: 100%; height: auto;"/>
       </div>
     </div>
 
@@ -383,9 +399,9 @@
       <div class="column is-four-fifths">
         <h3 class="title is-3">Analysis and Discussion</h3>
         <div class="content has-text-justified">
-          <h4 class="title is-4">Comparison of Different Reward Sources</h4>
+          <h4 class="title is-4">Quality of Process Supervision Signals</h4>
           <p>
-            Process rewards can be collected from different sources. We evaluated their effectiveness in guiding agent actions toward correct answers and their alignment with human preferences, comparing GPT-4o annotations, Llama-3.1-8B annotations, and rollout-based annotations using Math-Shepherd, alongside human expert annotations on MedQA. The results in the table below show that the GPT-4o-trained reward model delivers the highest performance across all datasets, providing precise, fine-grained rewards for agent optimization and achieving the strongest agreement with human experts (85.85%). Although Llama-3.1-8B and rollout-based annotations outperform random baselines, they remain less effective than GPT-4o annotations and can even underperform on general-domain questions. These findings highlight the limitations of rollout-based methods—originally designed for math reasoning—in complex reasoning and search tasks, and underscore the need for tailored approaches in agentic RAG.
+            The value of process supervision depends on where the reward comes from. We compare an outcome reward model (ORM) with process reward models (PRMs) trained on random preferences, Monte Carlo rollouts, or annotations from Llama-3.1-8B or GPT-4o. Rollout-based rewards, widely used for mathematical reasoning, perform poorly for retrieval: on 2WikiMultihopQA, the rollout PRM reaches 49.57% F1, below the ORM at 55.59%. A correct final answer can come from parametric memory even when the search trajectory is irrelevant, so rollouts end up reinforcing flawed trajectories. As the table below shows, GPT-4o annotations produce the best critic on all four datasets. They also agree most with human judgment, reaching 85.85% agreement with medical experts on MedQA, and human annotators endorsed GPT-4o's top-ranked action in 82% of 100 sampled HotpotQA steps.
           </p>
         </div>
       </div>
@@ -465,29 +481,28 @@
 
           <div class="column">
             <div class="content">
-              <h4 class="title is-4">Training Time Scaling</h4>
+              <h4 class="title is-4">Training Data Scaling</h4>
               <p>
-                This figure displays how the performance of Re²Search agents scales with the availability of more training data across four datasets. In general, the performance of Re²Search improves with an increasing number of training samples, but the gains tend to converge as the sample size grows.  Notably, on HotpotQA, 2WikiMultihopQA, and Bambooglem, even a small amount of process reward data (250 samples) yield significant performance gains.
+                We vary the number of process-reward samples used to train the critic from 250 to 1,000. On HotpotQA, 2WikiMultihopQA, and Bamboogle, as few as 250 samples already yield substantial F1 gains over the zero-shot (ZSL) baseline. MedQA needs more data: accuracy starts below the baseline at 250 samples and peaks at 1,000, suggesting that domain-specific reasoning takes longer to learn.
               </p>
             </div>
             <div class="columns is-centered">
               <div class="column is-full has-text-centered">
-                <img src="./figs/train_scale.png" alt="Training Time Scaling" class="center" style="width: 100%; max-width: 800px; height: auto;"/>
+                <img src="./figs/data_scaling.png" alt="Training data scaling" class="center" style="width: 100%; max-width: 800px; height: auto;"/>
               </div>
             </div>
           </div>
           
           <div class="column">
             <div class="content">
-              <h4 class="title is-4">Inference Time Scaling</h4>
+              <h4 class="title is-4">Inference Compute Scaling</h4>
               <p>
-                The results below show how the agent performance changes with the increasing number of sampled actions at each time step. We observe a consistent trend across multiple benchmarks, where increasing the number of sampled actions generally improves performance. However, performance gains gradually diminish, indicating that the agent reaches a point where additional sampled actions contribute less to improvement. 
-                <!-- This suggests that while action sampling is beneficial, there is a limit to how much additional sampling enhances decision-making. -->
+                Sampling more candidate actions at each step improves performance up to a saturation point, typically between <i>N</i> = 15 and <i>N</i> = 20. Beyond that, returns diminish, and on MedQA accuracy drops from 72.8% at <i>N</i> = 15 to 71.2% at <i>N</i> = 20, likely because a larger pool raises the chance of flawed actions that still score highly. A moderate budget of <i>N</i> around 10 to 15 offers the best balance between accuracy and cost.
               </p>
             </div>
             <div class="columns is-centered">
               <div class="column is-full has-text-centered">
-                <img src="./figs/test_scale.png" alt="Inference Time Scaling" class="center" style="width: 100%; max-width: 800px; height: auto;"/>
+                <img src="./figs/inference_scaling.png" alt="Inference compute scaling" class="center" style="width: 100%; max-width: 800px; height: auto;"/>
               </div>
             </div>
           </div>
@@ -505,14 +520,13 @@
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@misc{xiong2025rag,
-  title={RAG-Gym: Systematic Optimization of Language Agents for Retrieval-Augmented Generation}, 
+    <pre><code>@article{xiong2026supervising,
+  title={Supervising the search process produces reliable and generalizable information-seeking agents},
   author={Guangzhi Xiong and Qiao Jin and Xiao Wang and Yin Fang and Haolin Liu and Yifan Yang and Fangyuan Chen and Zhixing Song and Dengyu Wang and Minjia Zhang and Zhiyong Lu and Aidong Zhang},
-  year={2025},
-  eprint={2502.13957},
-  archivePrefix={arXiv},
-  primaryClass={cs.CL},
-  url={https://arxiv.org/abs/2502.13957}, 
+  journal={Nature Communications},
+  year={2026},
+  doi={10.1038/s41467-026-78807-z},
+  url={https://www.nature.com/articles/s41467-026-78807-z}
 }</code></pre>
   </div>
 </section>
@@ -522,7 +536,7 @@
   <div class="container">
     <div class="content has-text-centered">
       <a class="icon-link"
-         href="https://arxiv.org/abs/2502.13957">
+         href="https://www.nature.com/articles/s41467-026-78807-z">
         <i class="fas fa-file-pdf"></i>
       </a>
       <a class="icon-link" href="https://github.com/RAG-Gym/RAG-Gym" class="external-link" disabled>
@@ -533,7 +547,7 @@
       <div class="column is-8">
         <div class="content">
           <p>
-            This website is website adapted from <a href="https://nerfies.github.io/">Nerfies</a> and <a href="https://mathvista.github.io/">MathVista</a>, licensed under a <a rel="license"
+            This website is adapted from <a href="https://nerfies.github.io/">Nerfies</a> and <a href="https://mathvista.github.io/">MathVista</a>, licensed under a <a rel="license"
             href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
             Commons Attribution-ShareAlike 4.0 International License</a>.
           </p>
